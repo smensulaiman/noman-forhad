@@ -27,15 +27,19 @@
         android:id="@+id/tv_notification_input_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_input_number"
-        android:layout_margin="8dp"
+        android:layout_above="@id/layout_number"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="@string/enter_phone_number" />
 
     <LinearLayout
+        android:id="@+id/layout_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_notification_input_number"
+        android:layout_centerInParent="true"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
         android:gravity="center"
@@ -52,7 +56,8 @@
                 android:backgroundTint="#00887A"
                 android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                 android:focusableInTouchMode="false"
-                android:gravity="center" />
+                android:gravity="center"
+                android:visibility="gone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,9 +75,9 @@
                 android:drawableLeft="@drawable/ic_add_black_24dp"
                 android:gravity="center"
                 android:inputType="number"
-                tools:text="62" />
+                android:text="880" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/et_phone_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -87,21 +92,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Carrier SMS charges may apply" />
+            android:text="Test SMS charges may not apply" />
 
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_next_input_number"
-        android:layout_width="wrap_content"
-        android:layout_height="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
-        android:background="#25d366"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
         android:text="next"
-        android:textColor="@android:color/white" />
-
+        android:textColor="@android:color/white"
+        app:cornerRadius="14dp" />
 
 </RelativeLayout>

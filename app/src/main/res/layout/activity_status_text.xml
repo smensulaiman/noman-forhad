@@ -13,9 +13,9 @@
         android:layout_centerInParent="true"
         android:background="@null"
         android:gravity="center"
-        android:hint="Type a status"
+        android:hint="Write here..."
         android:textColor="@android:color/white"
-        android:textSize="40sp" />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

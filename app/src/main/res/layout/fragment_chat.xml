@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/default_wallpaper"
     android:orientation="vertical">
 
     <LinearLayout
@@ -62,7 +61,8 @@
         android:layout_above="@id/layout_bottom_chat"
         android:clipToPadding="false"
         android:paddingTop="5dp"
-        tools:listitem="@layout/item_chat_outgoing" />
+        tools:listitem="@layout/item_chat_outgoing"
+        tools:itemCount="4"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_chat"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#065E55</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#212975</color>
+    <color name="colorPrimaryDark">#151B54</color>
     <color name="colorAccent">#21C65A</color>
 
     <color name="statusIndigo">#8B6990</color>
@@ -16,6 +16,7 @@
     <color name="statusDeepPurple">#6E257E</color>
     <color name="statusLightGreen">#7ACBA5</color>
     <color name="statusDarkBlueGrey">#243640</color>
+    <color name="statusDarkBlueTransparent">#EE19252C</color>
     <color name="statusLightIndigo">#8294CA</color>
     <color name="statusPink">#A62C71</color>
     <color name="statusGreenLime">#90A841</color>

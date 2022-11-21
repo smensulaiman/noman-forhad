@@ -1,44 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.iceka.whatsappclone">
+    package="com.nomanforhad.finalproject">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name="com.nomanforhad.finalproject.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShareMediaActivity"></activity>
-        <activity android:name=".SelectCountryCallingCodeActivity" />
-        <activity android:name=".ShowMyStatusActivity" />
-        <activity android:name=".EditStatusActivity" />
-        <activity android:name=".ShowOtherStatusActivity" />
-        <activity android:name=".ChatRoomActivity" />
         <activity
-            android:name=".CreateProfileActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:name="com.nomanforhad.finalproject.AssignmentViewActivity"
+            android:exported="true" />
         <activity
-            android:name=".InputPhoneNumberActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:name="com.nomanforhad.finalproject.RoomListActivity"
+            android:exported="true" />
+        <activity android:name="com.nomanforhad.finalproject.ShareMediaActivity"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.SelectCountryCallingCodeActivity"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.ShowMyStatusActivity"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.EditStatusActivity"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.ShowOtherStatusActivity"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.ChatRoomActivity"
+            android:exported = "true"/>
         <activity
-            android:name=".PhoneVerifyActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ContactActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".CameraActivity" />
+            android:name="com.nomanforhad.finalproject.CreateProfileActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported = "true"/>
         <activity
-            android:name=".StatusTextActivity"
+            android:name="com.nomanforhad.finalproject.InputPhoneNumberActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported = "true"/>
+        <activity
+            android:name="com.nomanforhad.finalproject.PhoneVerifyActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.ContactActivity"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.MainActivity"
+            android:exported = "true"/>
+        <activity android:name="com.nomanforhad.finalproject.CameraActivity"
+            android:exported = "true"/>
+        <activity
+            android:name="com.nomanforhad.finalproject.StatusTextActivity"
+            android:exported = "true"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name=".WelcomeActivity">
+        <activity android:name="com.nomanforhad.finalproject.WelcomeActivity"
+            android:exported = "true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

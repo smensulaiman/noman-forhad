@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/default_wallpaper"
     tools:context=".ChatRoomActivity">
 
 
@@ -38,7 +37,7 @@
                     android:id="@+id/avatar_chat_room"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/thesislogo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -52,7 +51,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="bottom"
-                        android:text="Imam Candra Kusuma"
+                        android:text="Ehad And Rafi"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -93,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingLeft="4dp"
-                android:src="@drawable/ic_insert_emoticon_black_24dp" />
+                android:src="@drawable/ic_create_24dp" />
 
             <EditText
                 android:id="@+id/et_message_chat"
@@ -117,6 +116,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="6dp"
                 android:paddingRight="4dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_insert_photo_black_24dp" />
 
         </LinearLayout>
@@ -141,7 +141,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="#00897b"
-            android:src="@drawable/ic_keyboard_voice_black_24dp" />
+            android:src="@drawable/ic_send_black_24dp" />
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyvlerview_chat_tab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyvlerview_chat_tab" />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center_vertical"
             android:drawableRight="@drawable/ic_arrow_forward_black_24dp" />
-    </LinearLayout>
 
+    </LinearLayout>
 
 </RelativeLayout>

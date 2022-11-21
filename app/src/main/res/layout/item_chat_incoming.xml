@@ -7,13 +7,27 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="30dp">
 
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/img_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/placeholder"
+        app:placeholderImageScaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:roundingBorderColor="@color/colorPrimary"
+        app:roundingBorderWidth="2dp"
+        android:scaleType="fitCenter"
+        app:roundAsCircle="true"
+        android:layout_margin="4dp"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_first_incoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bubble_incoming"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintLeft_toRightOf="@id/img_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:id="@+id/layout_chat_incoming"
@@ -21,15 +35,18 @@
             android:layout_height="wrap_content"
             app:layout_constraintRight_toLeftOf="@id/tv_time_chat_incoming"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/layout_first">
-            <!--            app:layout_constraintEnd_toStartOf="@id/tv_time_chat_outgoing"-->
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_chat_incoming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ini adalah yanhgjhskfjfasdfa bisa gini gangerti "
+                android:background="@drawable/shape_bg_incoming_bubble"
+                android:paddingHorizontal="40dp"
+                android:paddingVertical="10dp"
+                android:text="This is a dummy text message"
                 android:textColor="@android:color/black" />
+
         </LinearLayout>
 
         <TextView
@@ -38,11 +55,9 @@
             android:layout_height="wrap_content"
             android:text="10:10 PM"
             android:textSize="12sp"
-            android:layout_marginLeft="6dp"
-            app:layout_constraintBottom_toBottomOf="@id/layout_first"
-            app:layout_constraintRight_toRightOf="@id/layout_first" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_chat_incoming" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
