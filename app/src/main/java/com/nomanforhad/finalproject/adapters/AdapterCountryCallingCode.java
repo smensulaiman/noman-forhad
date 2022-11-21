@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nomanforhad.finalproject.InputPhoneNumberActivity;
+import com.nomanforhad.finalproject.activities.InputPhoneNumberActivity;
 import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.models.CountryCallingCode;
 

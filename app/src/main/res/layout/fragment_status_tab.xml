@@ -159,7 +159,8 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="upload a file"
                 android:textSize="12sp"
-                app:cornerRadius="14dp" />
+                app:cornerRadius="14dp"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

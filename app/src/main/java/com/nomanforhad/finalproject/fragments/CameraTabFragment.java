@@ -33,7 +33,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nomanforhad.finalproject.EditStatusActivity;
+import com.nomanforhad.finalproject.activities.EditStatusActivity;
 import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.GalleryAdapter;
 import com.nomanforhad.finalproject.utils.RunTimePermissions;

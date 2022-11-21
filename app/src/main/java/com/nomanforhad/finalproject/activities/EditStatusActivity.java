@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.models.StatusItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.GalleryAdapter;
 
 import java.util.ArrayList;

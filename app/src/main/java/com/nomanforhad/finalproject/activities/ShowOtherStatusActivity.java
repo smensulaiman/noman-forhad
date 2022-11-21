@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.StatusFlipperAdapter;
 import com.nomanforhad.finalproject.models.StatusItem;
 import com.nomanforhad.finalproject.models.User;

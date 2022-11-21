@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.nomanforhad.finalproject.R;
 
 import java.util.Arrays;
 
@@ -79,6 +81,7 @@ public class InputPhoneNumberActivity extends AppCompatActivity {
                     Intent intent = new Intent(InputPhoneNumberActivity.this, PhoneVerifyActivity.class);
                     intent.putExtra("phonenumber", mPhoneNumber);
                     startActivity(intent);
+                    finish();
                 })
                 .setNegativeButton("Edit", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog dialog = builder.create();

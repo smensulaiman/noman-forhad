@@ -1,8 +1,9 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.RoomAdapter;
 import com.nomanforhad.finalproject.adapters.UserAdapter;
 import com.nomanforhad.finalproject.databinding.ActivityRoomListBinding;
@@ -52,8 +54,8 @@ public class RoomListActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         firebaseAuth = FirebaseAuth.getInstance();
         instructorId = firebaseAuth.getUid();
@@ -112,7 +114,6 @@ public class RoomListActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 firebaseAuth.signOut();
-                startActivity(new Intent(RoomListActivity.this, WelcomeActivity.class));
                 finish();
             }
         });
@@ -174,11 +175,13 @@ public class RoomListActivity extends AppCompatActivity {
                                 room.setStudents(userAdapter.getSelectedUsers());
 
                                 databaseReference.child(key).setValue(room);
+                                dialogInterface.dismiss();
 
                             })
                             .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
                             .create();
-                    dialog.show();
+
+                    new Handler().post(() -> runOnUiThread(() -> dialog.show()));
 
                 }
 

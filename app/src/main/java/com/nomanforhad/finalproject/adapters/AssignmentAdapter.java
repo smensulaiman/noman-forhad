@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nomanforhad.finalproject.R;
-import com.nomanforhad.finalproject.ShowOtherStatusActivity;
+import com.nomanforhad.finalproject.activities.ShowOtherStatusActivity;
 import com.nomanforhad.finalproject.models.Status;
 import com.nomanforhad.finalproject.models.User;
 

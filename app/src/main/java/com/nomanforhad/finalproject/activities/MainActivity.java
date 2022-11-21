@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.TabAdapter;
 import com.nomanforhad.finalproject.fragments.AssignmentsTabFragment;
 import com.nomanforhad.finalproject.fragments.ChatTabFragment;

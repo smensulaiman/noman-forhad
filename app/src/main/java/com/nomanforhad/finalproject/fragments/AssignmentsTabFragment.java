@@ -27,9 +27,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.devlomi.circularstatusview.CircularStatusView;
-import com.nomanforhad.finalproject.CameraActivity;
+import com.nomanforhad.finalproject.activities.CameraActivity;
 import com.nomanforhad.finalproject.R;
-import com.nomanforhad.finalproject.ShowMyStatusActivity;
+import com.nomanforhad.finalproject.activities.ShowMyStatusActivity;
 import com.nomanforhad.finalproject.adapters.AssignmentAdapter;
 import com.nomanforhad.finalproject.adapters.AssignmentFileAdapter;
 import com.nomanforhad.finalproject.models.Assignment;
@@ -104,6 +104,11 @@ public class AssignmentsTabFragment extends Fragment {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mStatusReference = FirebaseDatabase.getInstance().getReference().child("assignment");
         myId = mFirebaseAuth.getCurrentUser().getUid();
+        Utility.getCurrentUser(myId, user -> {
+            if (User.UserType.valueOf(user.getUserType()) == User.UserType.STUDENT){
+                btnUploadFile.setVisibility(View.VISIBLE);
+            }
+        });
 
         getMyStatus();
         getOtherStatus();

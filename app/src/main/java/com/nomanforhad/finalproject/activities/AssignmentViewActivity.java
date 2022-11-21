@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.databinding.ActivityAssignmentViewBinding;
 import com.nomanforhad.finalproject.databinding.ViewEditMarksBinding;
 import com.nomanforhad.finalproject.models.Assignment;

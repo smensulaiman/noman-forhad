@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.ContactAdapter;
 import com.nomanforhad.finalproject.models.Room;
 import com.nomanforhad.finalproject.models.User;

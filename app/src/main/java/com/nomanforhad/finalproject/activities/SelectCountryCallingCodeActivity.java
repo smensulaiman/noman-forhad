@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.AdapterCountryCallingCode;
 import com.nomanforhad.finalproject.models.CountryCallingCode;
 import com.google.firebase.database.DataSnapshot;

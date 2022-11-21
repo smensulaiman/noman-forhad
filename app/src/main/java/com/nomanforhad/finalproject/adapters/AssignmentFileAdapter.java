@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nomanforhad.finalproject.AssignmentViewActivity;
+import com.nomanforhad.finalproject.activities.AssignmentViewActivity;
 import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.models.Assignment;
 

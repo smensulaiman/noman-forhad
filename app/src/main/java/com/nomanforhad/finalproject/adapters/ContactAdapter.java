@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nomanforhad.finalproject.ChatRoomActivity;
+import com.nomanforhad.finalproject.activities.ChatRoomActivity;
 import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.models.User;
 

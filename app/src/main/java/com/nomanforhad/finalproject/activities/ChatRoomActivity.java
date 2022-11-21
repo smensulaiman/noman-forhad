@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.ChatRoomAdapter;
 import com.nomanforhad.finalproject.models.Chat;
 import com.nomanforhad.finalproject.models.Conversation;

@@ -17,46 +17,46 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.nomanforhad.finalproject.AssignmentViewActivity"
+            android:name="com.nomanforhad.finalproject.activities.AssignmentViewActivity"
             android:exported="true" />
         <activity
-            android:name="com.nomanforhad.finalproject.RoomListActivity"
-            android:exported="true" />
-        <activity android:name="com.nomanforhad.finalproject.ShareMediaActivity"
+            android:name="com.nomanforhad.finalproject.activities.RoomListActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"/>
+        <activity android:name="com.nomanforhad.finalproject.activities.ShareMediaActivity"
             android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.SelectCountryCallingCodeActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.SelectCountryCallingCodeActivity"
             android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.ShowMyStatusActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.ShowMyStatusActivity"
             android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.EditStatusActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.EditStatusActivity"
             android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.ShowOtherStatusActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.ShowOtherStatusActivity"
             android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.ChatRoomActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.ChatRoomActivity"
             android:exported = "true"/>
         <activity
-            android:name="com.nomanforhad.finalproject.CreateProfileActivity"
+            android:name="com.nomanforhad.finalproject.activities.CreateProfileActivity"
+            android:exported = "true"/>
+        <activity
+            android:name="com.nomanforhad.finalproject.activities.InputPhoneNumberActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported = "true"/>
         <activity
-            android:name="com.nomanforhad.finalproject.InputPhoneNumberActivity"
+            android:name="com.nomanforhad.finalproject.activities.PhoneVerifyActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported = "true"/>
-        <activity
-            android:name="com.nomanforhad.finalproject.PhoneVerifyActivity"
-            android:windowSoftInputMode="adjustResize"
+        <activity android:name="com.nomanforhad.finalproject.activities.ContactActivity"
             android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.ContactActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.MainActivity"
             android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.MainActivity"
-            android:exported = "true"/>
-        <activity android:name="com.nomanforhad.finalproject.CameraActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.CameraActivity"
             android:exported = "true"/>
         <activity
-            android:name="com.nomanforhad.finalproject.StatusTextActivity"
+            android:name="com.nomanforhad.finalproject.activities.StatusTextActivity"
             android:exported = "true"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name="com.nomanforhad.finalproject.WelcomeActivity"
+        <activity android:name="com.nomanforhad.finalproject.activities.WelcomeActivity"
             android:exported = "true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

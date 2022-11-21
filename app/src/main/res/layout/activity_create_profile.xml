@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateProfileActivity">
+    tools:context=".activities.CreateProfileActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_create_profile"
@@ -138,14 +138,12 @@
 
     <Button
         android:id="@+id/bt_next_main"
-        android:layout_width="wrap_content"
-        android:layout_height="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="20dp"
         android:background="#25d366"
         android:text="next"
         android:textColor="@android:color/white" />

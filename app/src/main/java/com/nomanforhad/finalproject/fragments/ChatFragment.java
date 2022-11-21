@@ -1,6 +1,6 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.fragments;
 
-import static com.nomanforhad.finalproject.ChatRoomActivity.idFromContact;
+import static com.nomanforhad.finalproject.activities.ChatRoomActivity.idFromContact;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.ChatRoomAdapter;
 import com.nomanforhad.finalproject.models.Chat;
 import com.nomanforhad.finalproject.models.Conversation;

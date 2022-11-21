@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.databinding.ActivityCreateProfileBinding;
 import com.nomanforhad.finalproject.models.User;
 import com.google.android.material.textfield.TextInputLayout;

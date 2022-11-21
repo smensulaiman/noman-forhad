@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".WelcomeActivity">
+    android:background="#000000"
+    tools:context=".activities.WelcomeActivity">
 
     <TextView
         android:id="@+id/tv_welcome_to_whatsapp"
@@ -53,6 +54,7 @@
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:lineSpacingExtra="3dp"
+            android:textColor="@android:color/white"
             android:text="@string/term_of_service" />
 
         <Button

@@ -1,4 +1,4 @@
-package com.nomanforhad.finalproject;
+package com.nomanforhad.finalproject.activities;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.StatusFlipperAdapter;
 import com.nomanforhad.finalproject.models.StatusItem;
 import com.nomanforhad.finalproject.utils.Utility;

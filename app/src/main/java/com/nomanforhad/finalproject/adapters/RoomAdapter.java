@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nomanforhad.finalproject.MainActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.nomanforhad.finalproject.activities.MainActivity;
 import com.nomanforhad.finalproject.databinding.ItemRoomBinding;
 import com.nomanforhad.finalproject.models.Room;
+import com.nomanforhad.finalproject.models.User;
 
 import java.util.List;
 
@@ -41,32 +45,32 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         holder.binding.txtDeadline.setText("End Date : " + room.getDeadLine());
         holder.itemView.setOnClickListener(view -> {
 
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra("ROOM_ID", room.getRoomId());
-            context.startActivity(intent);
+//            Intent intent = new Intent(context, MainActivity.class);
+//            intent.putExtra("ROOM_ID", room.getRoomId());
+//            context.startActivity(intent);
 
-//            boolean exists = false;
-//
-//            for (User student : room.getStudents()) {
-//                if (student.getUid().equals(FirebaseAuth.getInstance().getUid())) {
-//                    exists = true;
-//                    break;
-//                }
-//            }
-//
-//            if (exists) {
-//                Intent intent = new Intent(context, MainActivity.class);
-//                intent.putExtra("ROOM_ID", room.getRoomId());
-//                context.startActivity(intent);
-//            } else {
-//
-//                AlertDialog alertDialog = new MaterialAlertDialogBuilder(context)
-//                        .setTitle("Warning !!!")
-//                        .setMessage("You are not authorized to enter this room")
-//                        .setNeutralButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss()).create();
-//                alertDialog.show();
-//
-//            }
+            boolean exists = false;
+
+            for (User student : room.getStudents()) {
+                if (student.getUid().equals(FirebaseAuth.getInstance().getUid())) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (exists) {
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("ROOM_ID", room.getRoomId());
+                context.startActivity(intent);
+            } else {
+
+                AlertDialog alertDialog = new MaterialAlertDialogBuilder(context)
+                        .setTitle("Warning !!!")
+                        .setMessage("You are not authorized to enter this room")
+                        .setNeutralButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss()).create();
+                alertDialog.show();
+
+            }
 
         });
     }

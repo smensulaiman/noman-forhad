@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:title="@string/app_name"
+            android:title="Thesis Automation"
             app:titleTextColor="@android:color/white"
-            android:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_scrollFlags="enterAlways" />
 
         <com.google.android.material.tabs.TabLayout
@@ -72,6 +72,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_comment_white_24dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:tint="@android:color/white"
             app:tint="@android:color/white" />
 
