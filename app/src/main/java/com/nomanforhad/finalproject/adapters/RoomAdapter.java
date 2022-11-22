@@ -45,10 +45,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         holder.binding.txtDeadline.setText("End Date : " + room.getDeadLine());
         holder.itemView.setOnClickListener(view -> {
 
-//            Intent intent = new Intent(context, MainActivity.class);
-//            intent.putExtra("ROOM_ID", room.getRoomId());
-//            context.startActivity(intent);
-
             boolean exists = false;
 
             for (User student : room.getStudents()) {
@@ -61,6 +57,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
             if (exists) {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("ROOM_ID", room.getRoomId());
+                intent.putExtra("ROOM_NAME", room.getRoomName());
                 context.startActivity(intent);
             } else {
 

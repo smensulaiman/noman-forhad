@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.nomanforhad.finalproject"
-        minSdkVersion 21
+        minSdkVersion 23
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 31
         versionCode 1
@@ -64,6 +64,9 @@ dependencies {
 
     //Pdf Viewer
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    //Jitsi
+    implementation('org.jitsi.react:jitsi-meet-sdk:2.9.0') { transitive = true }
 
 }
 apply plugin: 'com.google.gms.google-services'

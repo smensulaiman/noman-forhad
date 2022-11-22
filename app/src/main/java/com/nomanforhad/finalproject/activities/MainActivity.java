@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference fileRef;
     private Room currentRoom;
     private String currentRoomId;
+    private String currentRoomName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
         mAppBarLayout = findViewById(R.id.appbar_layout);
 
         currentRoomId = getIntent().getStringExtra("ROOM_ID");
+        currentRoomName = getIntent().getStringExtra("ROOM_NAME");
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mToolbar.setSubtitle(mFirebaseUser.getDisplayName());
 
         FirebaseDatabase.getInstance().getReference("rooms").child(currentRoomId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -83,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
                     mTabAdapter = new TabAdapter(MainActivity.this, getSupportFragmentManager());
 
                     ChatTabFragment chatTabFragment = new ChatTabFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ROOM_ID", currentRoomId);
+                    bundle.putString("ROOM_NAME", currentRoomName);
+                    chatTabFragment.setArguments(bundle);
                     AssignmentsTabFragment assignmentsTabFragment = new AssignmentsTabFragment();
                     ProfileFragment profileFragment = new ProfileFragment();
 
