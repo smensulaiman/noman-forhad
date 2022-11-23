@@ -14,8 +14,11 @@
         <entry key="app/src/main/res/layout/activity_show_my_status.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/activity_status_text.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.2490740740740741" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.2361111111111111" />
         <entry key="app/src/main/res/layout/fragment_chat_tab.xml" value="0.2490740740740741" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2361111111111111" />
         <entry key="app/src/main/res/layout/fragment_status_tab.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/layout/row_notice.xml" value="0.2361111111111111" />
       </map>
     </option>
   </component>

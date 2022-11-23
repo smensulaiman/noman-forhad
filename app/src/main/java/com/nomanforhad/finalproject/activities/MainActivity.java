@@ -3,7 +3,6 @@ package com.nomanforhad.finalproject.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,7 +18,7 @@ import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.TabAdapter;
 import com.nomanforhad.finalproject.fragments.AssignmentsTabFragment;
 import com.nomanforhad.finalproject.fragments.ChatTabFragment;
-import com.nomanforhad.finalproject.fragments.ProfileFragment;
+import com.nomanforhad.finalproject.fragments.NoticeFragment;
 import com.nomanforhad.finalproject.models.Assignment;
 import com.nomanforhad.finalproject.models.Room;
 import com.google.android.gms.tasks.Continuation;
@@ -93,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString("ROOM_NAME", currentRoomName);
                     chatTabFragment.setArguments(bundle);
                     AssignmentsTabFragment assignmentsTabFragment = new AssignmentsTabFragment();
-                    ProfileFragment profileFragment = new ProfileFragment();
+                    NoticeFragment noticeFragment = new NoticeFragment();
 
                     mTabAdapter.addFragment(chatTabFragment, "Students");
                     mTabAdapter.addFragment(assignmentsTabFragment, "Assignments");
-                    mTabAdapter.addFragment(profileFragment, "Notices");
+                    mTabAdapter.addFragment(noticeFragment, "Notices");
 
                     mViewPager.setAdapter(mTabAdapter);
 
