@@ -3,6 +3,9 @@ package com.nomanforhad.finalproject.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -51,6 +54,10 @@ public class PhoneVerifyActivity extends AppCompatActivity {
         @Override
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
+            if(mProgressDialog.isShowing()){
+                mProgressDialog.dismiss();
+            }
+            mBtNext.setVisibility(View.VISIBLE);
             verificationId = s;
         }
 
@@ -66,6 +73,9 @@ public class PhoneVerifyActivity extends AppCompatActivity {
         @Override
         public void onVerificationFailed(FirebaseException e) {
             Toast.makeText(PhoneVerifyActivity.this, "Something went wrong: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            if(mProgressDialog.isShowing()){
+                mProgressDialog.dismiss();
+            }
         }
     };
 
@@ -90,9 +100,11 @@ public class PhoneVerifyActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        sendVerificationCode(phoneNumber);
-
         mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.show();
+        mBtNext.setVisibility(View.GONE);
+
+        new Handler(Looper.getMainLooper()).post(() -> sendVerificationCode(phoneNumber));
 
         mBtNext.setOnClickListener(view -> {
             String code = mEtCode.getText().toString();
@@ -106,6 +118,9 @@ public class PhoneVerifyActivity extends AppCompatActivity {
             signInWithCredential(credential);
         } catch (Exception e) {
             e.printStackTrace();
+            if(mProgressDialog.isShowing()){
+                mProgressDialog.dismiss();
+            }
             Toast.makeText(this, "Verification code wrong", Toast.LENGTH_SHORT).show();
         }
     }
@@ -114,7 +129,11 @@ public class PhoneVerifyActivity extends AppCompatActivity {
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        mFirebaseDatabase.getReference("users").child(mFirebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                        if(mProgressDialog.isShowing()){
+                            mProgressDialog.dismiss();
+                        }
+                        mFirebaseDatabase.getReference("users").child(mFirebaseAuth.getUid())
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
@@ -134,6 +153,9 @@ public class PhoneVerifyActivity extends AppCompatActivity {
                             }
                         });
                     } else {
+                        if(mProgressDialog.isShowing()){
+                            mProgressDialog.dismiss();
+                        }
                         Toast.makeText(PhoneVerifyActivity.this, "Cannot verify : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -154,19 +176,6 @@ public class PhoneVerifyActivity extends AppCompatActivity {
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage("Verifying");
         mProgressDialog.show();
-        new Thread(() -> {
-            int loading = 0;
-            while (loading < 100) {
-                try {
-                    Thread.sleep(150);
-                    loading += 20;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            mProgressDialog.dismiss();
-            PhoneVerifyActivity.this.runOnUiThread(() -> verifyCode(code));
-
-        }).start();
+        verifyCode(code);
     }
 }

@@ -56,7 +56,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.My
                 User user = dataSnapshot.getValue(User.class);
                 holder.mUsername.setText(user.getUsername());
                 try {
-                    Glide.with(holder.mThumbnail.getContext())
+                    Glide.with(mContext.getApplicationContext())
                             .load(user.getPhotoUrl())
                             .into(holder.mThumbnail);
                 } catch (Exception e) {

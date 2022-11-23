@@ -3,6 +3,7 @@ package com.nomanforhad.finalproject.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -78,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mToolbar.setSubtitle(mFirebaseUser.getDisplayName());
 
-        FirebaseDatabase.getInstance().getReference("rooms").child(currentRoomId).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("rooms").child(currentRoomId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -112,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         mToolbar.setNavigationOnClickListener(view -> super.onBackPressed());
 
         fileRef = FirebaseDatabase.getInstance().getReference().child("files");

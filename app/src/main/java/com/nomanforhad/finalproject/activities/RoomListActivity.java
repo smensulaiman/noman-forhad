@@ -67,7 +67,7 @@ public class RoomListActivity extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.recyclerView.setAdapter(roomAdapter);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -128,9 +128,10 @@ public class RoomListActivity extends AppCompatActivity {
 
             List<User> users = new ArrayList<>();
 
-            firebaseDatabase.getReference("users").addValueEventListener(new ValueEventListener() {
+            firebaseDatabase.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    users.clear();
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         User user = userSnapshot.getValue(User.class);
                         users.add(user);

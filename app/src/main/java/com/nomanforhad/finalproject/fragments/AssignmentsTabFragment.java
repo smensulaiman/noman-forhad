@@ -219,11 +219,11 @@ public class AssignmentsTabFragment extends Fragment {
                                     StatusItem statusItem = snapshot.getValue(StatusItem.class);
                                     byte[] byteArray = Base64.decode(statusItem.getThumbnail(), Base64.DEFAULT);
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                                    Glide.with(getContext())
+                                    Glide.with(getContext().getApplicationContext())
                                             .load(bitmap)
                                             .into(mAvatar);
                                 } else {
-                                    Glide.with(getContext())
+                                    Glide.with(getContext().getApplicationContext())
                                             .load(mFirebaseUser.getPhotoUrl())
                                             .into(mAvatar);
                                 }
@@ -251,7 +251,7 @@ public class AssignmentsTabFragment extends Fragment {
                     }
                 } else {
                     layout.setOnClickListener(view -> startActivity(new Intent(getContext(), CameraActivity.class)));
-                    Glide.with(getContext())
+                    Glide.with(getContext().getApplicationContext())
                             .load(mFirebaseUser.getPhotoUrl())
                             .into(mAvatar);
                     mCircularStatusCount.setVisibility(View.GONE);
