@@ -1,6 +1,11 @@
 package com.nomanforhad.finalproject.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +37,11 @@ import java.util.List;
 public class NoticeFragment extends Fragment {
 
     private FragmentProfileBinding binding;
+    private ViewCreateNoticeBinding noticeBinding;
     private User user;
     private NoticeAdapter noticeAdapter;
     private List<Notice> noticeList;
+    private String fileUrl = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +62,11 @@ public class NoticeFragment extends Fragment {
 
         binding.fabChat.setOnClickListener(view -> {
 
-            ViewCreateNoticeBinding noticeBinding = ViewCreateNoticeBinding.inflate(inflater);
+            noticeBinding = ViewCreateNoticeBinding.inflate(inflater);
+            noticeBinding.btnAttachFile.setOnClickListener(view1 -> {
+                choosePdf();
+            });
+
             AlertDialog alertDialog = new MaterialAlertDialogBuilder(getContext())
                     .setIcon(R.drawable.ic_edit_black_24dp)
                     .setTitle("Create Notice")
@@ -72,7 +83,7 @@ public class NoticeFragment extends Fragment {
                         notice.setTeacherName(user.getUsername());
                         notice.setTeacherImage(user.getPhotoUrl());
                         notice.setNotice(strNotice);
-                        notice.setFileUrl("");
+                        notice.setFileUrl(fileUrl);
                         notice.setRoomId(null);
                         ref.child(key).setValue(notice);
 
@@ -101,5 +112,43 @@ public class NoticeFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    public void setFileUri(Uri fileUri, String myUrl){
+        noticeBinding.txtFileName.setText(getFileName(fileUri));
+        this.fileUrl = myUrl;
+    }
+
+    @SuppressLint("Range")
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContext().getContentResolver().query(uri, null,
+                    null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    private static final int PDF_CHOOSER_CODE = 1002;
+
+    private void choosePdf() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        getActivity().startActivityForResult(intent, PDF_CHOOSER_CODE);
     }
 }

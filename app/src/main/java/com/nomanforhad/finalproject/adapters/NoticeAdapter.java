@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.activities.ChatRoomActivity;
+import com.nomanforhad.finalproject.activities.PDFViewActivity;
 import com.nomanforhad.finalproject.models.Notice;
 import com.nomanforhad.finalproject.models.User;
 
@@ -49,6 +50,16 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
         final Notice notice = noticeList.get(position);
         holder.txtTeacherName.setText(notice.getTeacherName());
         holder.txtDescription.setText(notice.getNotice());
+        if(notice.getFileName() == null){
+            holder.txtFileName.setVisibility(View.GONE);
+        }else{
+            holder.txtFileName.setText("Attachment : " + notice.getFileName());
+            holder.txtFileName.setOnClickListener(view -> {
+                Intent intent = new Intent(mContext, PDFViewActivity.class);
+                intent.putExtra("pdf", notice.getFileUrl());
+                mContext.startActivity(intent);
+            });
+        }
         Glide.with(mContext.getApplicationContext())
                 .load(notice.getTeacherImage())
                 .into(holder.mAvatar);
@@ -62,6 +73,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtTeacherName;
+        private TextView txtFileName;
         private TextView txtDescription;
         private CircleImageView mAvatar;
 
@@ -69,6 +81,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
             super(itemView);
 
             txtTeacherName = itemView.findViewById(R.id.txt_teacher_name);
+            txtFileName = itemView.findViewById(R.id.txt_file_name);
             txtDescription = itemView.findViewById(R.id.txt_notice);
             mAvatar = itemView.findViewById(R.id.img_teacher_image);
 

@@ -23,4 +23,28 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="end"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/txt_file_name"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="No file selected"
+            android:layout_marginHorizontal="8dp"/>
+
+        <Button
+            android:id="@+id/btn_attach_file"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:text="browse"
+            android:textSize="10dp"/>
+
+    </LinearLayout>
+
 </LinearLayout>

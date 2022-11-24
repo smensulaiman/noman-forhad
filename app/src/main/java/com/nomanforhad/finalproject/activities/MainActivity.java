@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private Room currentRoom;
     private String currentRoomId;
     private String currentRoomName;
+    private NoticeFragment noticeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString("ROOM_NAME", currentRoomName);
                     chatTabFragment.setArguments(bundle);
                     AssignmentsTabFragment assignmentsTabFragment = new AssignmentsTabFragment();
-                    NoticeFragment noticeFragment = new NoticeFragment();
+                    noticeFragment = new NoticeFragment();
 
                     mTabAdapter.addFragment(chatTabFragment, "Students");
                     mTabAdapter.addFragment(assignmentsTabFragment, "Assignments");
@@ -220,7 +221,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
+        }else if(requestCode == 1002 && resultCode == RESULT_OK){
+
+            final Uri imageUri = data.getData();
+            final String timestamp = "" + System.currentTimeMillis();
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            final String messagePushID = timestamp;
+
+            final StorageReference filepath = storageReference.child(messagePushID + "." + "pdf");
+            Toast.makeText(MainActivity.this, filepath.getName(), Toast.LENGTH_SHORT).show();
+            filepath.putFile(imageUri).continueWithTask((Continuation) task -> filepath.getDownloadUrl()).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                if (task.isSuccessful()) {
+                    Uri uri = task.getResult();
+                    String myUrl = uri.toString();
+
+                    noticeFragment.setFileUri(data.getData(), myUrl);
+
+                } else {
+                    Toast.makeText(MainActivity.this, "UploadedFailed", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }else {
             Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }
     }

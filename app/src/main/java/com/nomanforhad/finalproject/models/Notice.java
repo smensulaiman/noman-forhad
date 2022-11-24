@@ -10,19 +10,8 @@ public class Notice implements Parcelable {
     private String teacherName;
     private String teacherImage;
     private String notice;
+    private String fileName;
     private String fileUrl;
-
-    public Notice() {
-    }
-
-    public Notice(String noticeId, String roomId, String teacherName, String teacherImage, String notice, String fileUrl) {
-        this.noticeId = noticeId;
-        this.roomId = roomId;
-        this.teacherName = teacherName;
-        this.teacherImage = teacherImage;
-        this.notice = notice;
-        this.fileUrl = fileUrl;
-    }
 
     public String getNoticeId() {
         return noticeId;
@@ -64,11 +53,32 @@ public class Notice implements Parcelable {
         this.notice = notice;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public String getFileUrl() {
         return fileUrl;
     }
 
     public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
+    public Notice() {
+    }
+
+    public Notice(String noticeId, String roomId, String teacherName, String teacherImage, String notice, String fileName, String fileUrl) {
+        this.noticeId = noticeId;
+        this.roomId = roomId;
+        this.teacherName = teacherName;
+        this.teacherImage = teacherImage;
+        this.notice = notice;
+        this.fileName = fileName;
         this.fileUrl = fileUrl;
     }
 
@@ -78,6 +88,7 @@ public class Notice implements Parcelable {
         teacherName = in.readString();
         teacherImage = in.readString();
         notice = in.readString();
+        fileName = in.readString();
         fileUrl = in.readString();
     }
 
@@ -88,6 +99,7 @@ public class Notice implements Parcelable {
         dest.writeString(teacherName);
         dest.writeString(teacherImage);
         dest.writeString(notice);
+        dest.writeString(fileName);
         dest.writeString(fileUrl);
     }
 
