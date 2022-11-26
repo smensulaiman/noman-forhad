@@ -93,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString("ROOM_NAME", currentRoomName);
                     chatTabFragment.setArguments(bundle);
                     AssignmentsTabFragment assignmentsTabFragment = new AssignmentsTabFragment();
+                    assignmentsTabFragment.setArguments(bundle);
                     noticeFragment = new NoticeFragment();
-
+                    noticeFragment.setArguments(bundle);
                     mTabAdapter.addFragment(chatTabFragment, "Students");
                     mTabAdapter.addFragment(assignmentsTabFragment, "Assignments");
                     mTabAdapter.addFragment(noticeFragment, "Notices");
@@ -211,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                     assignment.setAssignmentId(key);
                     assignment.setFileName(filepath.getName());
                     assignment.setFileUrl(myUrl);
+                    assignment.setRoomId(currentRoomId);
                     assignment.setUserName(mFirebaseUser.getDisplayName());
                     assignment.setUserId(mFirebaseUser.getUid());
                     fileRef.child(mFirebaseUser.getUid()).child(key).setValue(assignment);

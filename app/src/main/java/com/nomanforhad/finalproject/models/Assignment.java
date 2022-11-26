@@ -10,18 +10,21 @@ public class Assignment implements Parcelable {
     private String userName;
     private String userId;
     private String fileUrl;
+    private String roomId;
     private int grade = 0;
     private String remarks = "No Comment";
 
     public Assignment() {
     }
 
-    public Assignment(String assignmentId, String fileName, String userName, String userId, String fileUrl, int grade, String remarks) {
+    public Assignment(String assignmentId, String fileName, String userName,
+                      String userId, String fileUrl, String roomId, int grade, String remarks) {
         this.assignmentId = assignmentId;
         this.fileName = fileName;
         this.userName = userName;
         this.userId = userId;
         this.fileUrl = fileUrl;
+        this.roomId = roomId;
         this.grade = grade;
         this.remarks = remarks;
     }
@@ -34,6 +37,7 @@ public class Assignment implements Parcelable {
         fileUrl = in.readString();
         grade = in.readInt();
         remarks = in.readString();
+        roomId = in.readString();
     }
 
     @Override
@@ -45,6 +49,7 @@ public class Assignment implements Parcelable {
         dest.writeString(fileUrl);
         dest.writeInt(grade);
         dest.writeString(remarks);
+        dest.writeString(roomId);
     }
 
     @Override
@@ -119,4 +124,13 @@ public class Assignment implements Parcelable {
     public void setAssignmentId(String assignmentId) {
         this.assignmentId = assignmentId;
     }
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
+
 }

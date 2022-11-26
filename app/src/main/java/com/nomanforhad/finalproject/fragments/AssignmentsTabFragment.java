@@ -78,6 +78,7 @@ public class AssignmentsTabFragment extends Fragment {
     private List<Status> statusList = new ArrayList<>();
     private List<Assignment> assignmentList = new ArrayList<>();
     private List<String> viewedList = new ArrayList<>();
+    private String roomId;
 
     @Nullable
     @Override
@@ -100,10 +101,13 @@ public class AssignmentsTabFragment extends Fragment {
         mRecentStatusRv.setLayoutManager(layoutManager);
         recyclerViewFiles.setLayoutManager(viewedLayoutManager);
 
+        roomId = getArguments().getString("ROOM_ID");
+
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mStatusReference = FirebaseDatabase.getInstance().getReference().child("assignment");
         myId = mFirebaseAuth.getCurrentUser().getUid();
+
         Utility.getCurrentUser(myId, user -> {
             if (User.UserType.valueOf(user.getUserType()) == User.UserType.STUDENT){
                 btnUploadFile.setVisibility(View.VISIBLE);
@@ -139,7 +143,11 @@ public class AssignmentsTabFragment extends Fragment {
                             for (DataSnapshot childChild : child.getChildren()) {
                                 if (childChild.exists()) {
                                     Assignment assignment = childChild.getValue(Assignment.class);
-                                    assignmentList.add(assignment);
+                                    if(assignment.getRoomId() != null){
+                                        if(assignment.getRoomId().equals(roomId)){
+                                            assignmentList.add(assignment);
+                                        }
+                                    }
                                 }
                             }
                         }

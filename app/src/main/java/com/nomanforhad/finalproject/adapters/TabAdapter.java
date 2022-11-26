@@ -6,11 +6,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabAdapter extends FragmentPagerAdapter {
+public class TabAdapter extends FragmentStatePagerAdapter {
 
     private Context mContext;
     private List<Fragment> fragments;

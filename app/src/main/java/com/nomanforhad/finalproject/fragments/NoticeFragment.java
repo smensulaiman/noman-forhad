@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,20 +37,24 @@ import java.util.List;
 
 public class NoticeFragment extends Fragment {
 
+    private static final String TAG = "NoticeFragment";
+
     private FragmentProfileBinding binding;
     private ViewCreateNoticeBinding noticeBinding;
     private User user;
     private NoticeAdapter noticeAdapter;
     private List<Notice> noticeList;
     private String fileUrl = null;
+    private String roomId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         noticeList = new ArrayList<>();
+
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         noticeAdapter = new NoticeAdapter(getContext(), noticeList);
         binding.recyclerView.setAdapter(noticeAdapter);
         
@@ -59,6 +64,8 @@ public class NoticeFragment extends Fragment {
                 binding.fabChat.setVisibility(View.VISIBLE);
             }
         });
+
+        roomId = getArguments().getString("ROOM_ID");
 
         binding.fabChat.setOnClickListener(view -> {
 
@@ -84,7 +91,7 @@ public class NoticeFragment extends Fragment {
                         notice.setTeacherImage(user.getPhotoUrl());
                         notice.setNotice(strNotice);
                         notice.setFileUrl(fileUrl);
-                        notice.setRoomId(null);
+                        notice.setRoomId(roomId);
                         ref.child(key).setValue(notice);
 
                         dialogInterface.dismiss();
@@ -100,7 +107,13 @@ public class NoticeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 noticeList.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    noticeList.add(dataSnapshot.getValue(Notice.class));
+                    Notice notice = dataSnapshot.getValue(Notice.class);
+                    if (notice.getRoomId() != null){
+                        Log.d(TAG, "room id : " + roomId + " server room id : " + notice.getRoomId());
+                    if(notice.getRoomId().equals(roomId)){
+                        noticeList.add(dataSnapshot.getValue(Notice.class));
+                    }
+                    }
                 }
                 noticeAdapter.notifyDataSetChanged();
             }
