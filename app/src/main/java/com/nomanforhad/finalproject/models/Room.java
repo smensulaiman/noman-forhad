@@ -1,6 +1,11 @@
 package com.nomanforhad.finalproject.models;
 
+import android.annotation.SuppressLint;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Room {
 
@@ -69,6 +74,21 @@ public class Room {
 
     public void setStudents(List<User> students) {
         this.students = students;
+    }
+
+    @SuppressLint("NewApi")
+    public void insertOrUpdateStudents(List<User> students) {
+        if (students.size() > 0) {
+            for (User user : students) {
+                if (!this.students.contains(user)) {
+                    this.students.add(user);
+                }
+            }
+            Set<String> nameSet = new HashSet<>();
+            this.students = this.students.stream()
+                    .filter(e -> nameSet.add(e.getUid()))
+                    .collect(Collectors.toList());
+        }
     }
 
     public String getDeadLine() {

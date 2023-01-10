@@ -1,21 +1,31 @@
 package com.nomanforhad.finalproject.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.nomanforhad.finalproject.R;
 import com.nomanforhad.finalproject.adapters.TabAdapter;
+import com.nomanforhad.finalproject.adapters.UserAdapter;
 import com.nomanforhad.finalproject.fragments.AssignmentsTabFragment;
 import com.nomanforhad.finalproject.fragments.ChatTabFragment;
 import com.nomanforhad.finalproject.fragments.NoticeFragment;
@@ -35,7 +45,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.nomanforhad.finalproject.models.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,10 +69,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference userReference;
     private DatabaseReference fileRef;
-    private Room currentRoom;
+    private String instructorId;
     private String currentRoomId;
     private String currentRoomName;
     private NoticeFragment noticeFragment;
+    private Room currentRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,44 +87,51 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.toolbar);
         mAppBarLayout = findViewById(R.id.appbar_layout);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        instructorId = firebaseAuth.getUid();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        roomReference = firebaseDatabase.getReference("rooms");
+
         currentRoomId = getIntent().getStringExtra("ROOM_ID");
         currentRoomName = getIntent().getStringExtra("ROOM_NAME");
+
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mToolbar.setSubtitle(mFirebaseUser.getDisplayName());
 
         FirebaseDatabase.getInstance().getReference("rooms").child(currentRoomId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    currentRoom = snapshot.getValue(Room.class);
-                    mTabAdapter = new TabAdapter(MainActivity.this, getSupportFragmentManager());
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            currentRoom = snapshot.getValue(Room.class);
+                            mTabAdapter = new TabAdapter(MainActivity.this, getSupportFragmentManager());
 
-                    ChatTabFragment chatTabFragment = new ChatTabFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("ROOM_ID", currentRoomId);
-                    bundle.putString("ROOM_NAME", currentRoomName);
-                    chatTabFragment.setArguments(bundle);
-                    AssignmentsTabFragment assignmentsTabFragment = new AssignmentsTabFragment();
-                    assignmentsTabFragment.setArguments(bundle);
-                    noticeFragment = new NoticeFragment();
-                    noticeFragment.setArguments(bundle);
-                    mTabAdapter.addFragment(chatTabFragment, "Students");
-                    mTabAdapter.addFragment(assignmentsTabFragment, "Assignments");
-                    mTabAdapter.addFragment(noticeFragment, "Notices");
+                            ChatTabFragment chatTabFragment = new ChatTabFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("ROOM_ID", currentRoomId);
+                            bundle.putString("ROOM_NAME", currentRoomName);
+                            chatTabFragment.setArguments(bundle);
+                            AssignmentsTabFragment assignmentsTabFragment = new AssignmentsTabFragment();
+                            assignmentsTabFragment.setArguments(bundle);
+                            noticeFragment = new NoticeFragment();
+                            noticeFragment.setArguments(bundle);
+                            mTabAdapter.addFragment(chatTabFragment, "Students");
+                            mTabAdapter.addFragment(assignmentsTabFragment, "Assignments");
+                            mTabAdapter.addFragment(noticeFragment, "Notices");
 
-                    mViewPager.setAdapter(mTabAdapter);
+                            mViewPager.setAdapter(mTabAdapter);
 
-                    mTabLayout.setupWithViewPager(mViewPager);
-                }
-            }
+                            mTabLayout.setupWithViewPager(mViewPager);
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                    }
+                });
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -223,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        }else if(requestCode == 1002 && resultCode == RESULT_OK){
+        } else if (requestCode == 1002 && resultCode == RESULT_OK) {
 
             final Uri imageUri = data.getData();
             final String timestamp = "" + System.currentTimeMillis();
@@ -244,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        }else {
+        } else {
             Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }
     }
@@ -269,6 +290,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference roomReference;
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -278,6 +303,58 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
+                return true;
+            case R.id.menu_add_student:
+
+                ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("Please wait");
+                progressDialog.show();
+
+                List<User> users = new ArrayList<>();
+                firebaseDatabase.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        users.clear();
+                        progressDialog.dismiss();
+                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                            User user = userSnapshot.getValue(User.class);
+                            users.add(user);
+                        }
+
+                        View createRoomView = LayoutInflater.from(MainActivity.this).inflate(R.layout.view_create_new_room, null);
+
+                        createRoomView.findViewById(R.id.layout_room_name).setVisibility(View.GONE);
+                        createRoomView.findViewById(R.id.layout_room_deadline).setVisibility(View.GONE);
+
+                        UserAdapter userAdapter = new UserAdapter(MainActivity.this, users);
+                        RecyclerView recyclerViewStudents = createRoomView.findViewById(R.id.recyclerview_students);
+                        recyclerViewStudents.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        recyclerViewStudents.setItemViewCacheSize(users.size());
+                        recyclerViewStudents.setAdapter(userAdapter);
+
+                        AlertDialog dialog = new MaterialAlertDialogBuilder(MainActivity.this)
+                                .setTitle("Add New Student")
+                                .setView(createRoomView)
+                                .setPositiveButton("Update", (dialogInterface, i) -> {
+                                    currentRoom.insertOrUpdateStudents(userAdapter.getSelectedUsers());
+                                    FirebaseDatabase.getInstance().getReference("rooms").child(currentRoomId).setValue(currentRoom)
+                                            .addOnSuccessListener(unused -> {
+                                                Toast.makeText(MainActivity.this, "Success !!!", Toast.LENGTH_SHORT).show();
+                                            });
+                                })
+                                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                                .create();
+
+                        new Handler().post(() -> runOnUiThread(() -> dialog.show()));
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
