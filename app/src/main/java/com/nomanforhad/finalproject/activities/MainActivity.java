@@ -304,6 +304,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 return true;
+
             case R.id.menu_add_student:
 
                 ProgressDialog progressDialog = new ProgressDialog(this);
@@ -356,6 +357,63 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 return true;
+
+            case R.id.menu_remove_student:
+
+                progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("Please wait");
+                progressDialog.show();
+
+                users = new ArrayList<>();
+                users.clear();
+
+                firebaseDatabase.getReference("rooms").child(currentRoomId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Room room = snapshot.getValue(Room.class);
+                        for (User student : room.getStudents()) {
+                            assert student != null;
+                            if (!student.getUid().equals(mFirebaseUser.getUid())) {
+                                users.add(student);
+                            }
+                        }
+
+                        View createRoomView = LayoutInflater.from(MainActivity.this).inflate(R.layout.view_create_new_room, null);
+
+                        createRoomView.findViewById(R.id.layout_room_name).setVisibility(View.GONE);
+                        createRoomView.findViewById(R.id.layout_room_deadline).setVisibility(View.GONE);
+
+                        UserAdapter userAdapter = new UserAdapter(MainActivity.this, users);
+                        RecyclerView recyclerViewStudents = createRoomView.findViewById(R.id.recyclerview_students);
+                        recyclerViewStudents.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        recyclerViewStudents.setItemViewCacheSize(users.size());
+                        recyclerViewStudents.setAdapter(userAdapter);
+
+                        AlertDialog dialog = new MaterialAlertDialogBuilder(MainActivity.this)
+                                .setTitle("Delete Student")
+                                .setView(createRoomView)
+                                .setPositiveButton("Update", (dialogInterface, i) -> {
+                                    currentRoom.insertOrUpdateStudents(userAdapter.getSelectedUsers());
+                                    FirebaseDatabase.getInstance().getReference("rooms").child(currentRoomId).setValue(currentRoom)
+                                            .addOnSuccessListener(unused -> {
+                                                Toast.makeText(MainActivity.this, "Success !!!", Toast.LENGTH_SHORT).show();
+                                            });
+                                })
+                                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                                .create();
+
+                        new Handler().post(() -> runOnUiThread(() -> dialog.show()));
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

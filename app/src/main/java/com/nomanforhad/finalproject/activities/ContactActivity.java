@@ -84,7 +84,7 @@ public class ContactActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 contactList.clear();
